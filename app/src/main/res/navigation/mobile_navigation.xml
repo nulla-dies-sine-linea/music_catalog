@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_profile">
+    app:startDestination="@+id/nav_music_catalog">
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="org.hse.mcatalog.ui.home.HomeFragment"
+        android:name="org.hse.mcatalog.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_music_catalog"
-        android:name="org.hse.mcatalog.ui.gallery.GalleryFragment"
+        android:name="org.hse.mcatalog.ui.music_catalog.MCatalogFragment"
         android:label="@string/menu_music_catalog"
         tools:layout="@layout/fragment_music_catalog" />
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="org.hse.mcatalog.ui.slideshow.SlideshowFragment"
+        android:name="org.hse.mcatalog.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

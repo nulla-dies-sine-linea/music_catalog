@@ -1,4 +1,4 @@
-package org.hse.mcatalog.ui.gallery;
+package org.hse.mcatalog.ui.music_catalog;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.hse.mcatalog.R;
 
-public class GalleryFragment extends Fragment {
+public class MCatalogFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private MCatalogViewModel MCatalogViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        MCatalogViewModel =
+                new ViewModelProvider(this).get(MCatalogViewModel.class);
         View root = inflater.inflate(R.layout.fragment_music_catalog, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        MCatalogViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

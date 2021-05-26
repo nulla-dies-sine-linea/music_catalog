@@ -1,14 +1,14 @@
-package org.hse.mcatalog.ui.gallery;
+package org.hse.mcatalog.ui.music_catalog;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class MCatalogViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public MCatalogViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Список");
     }

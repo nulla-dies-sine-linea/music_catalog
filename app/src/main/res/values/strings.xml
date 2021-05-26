@@ -5,7 +5,8 @@
     <string name="nav_header_title">Светлана</string>
     <string name="nav_header_subtitle">svetlana.kashina.hse@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_list">List</string>
+    <string name="action_tiles">Tiles</string>
 
     <string name="menu_profile">Profile</string>
     <string name="menu_music_catalog">Music Catalog</string>

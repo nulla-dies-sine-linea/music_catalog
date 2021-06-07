@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModel;
 
 public class MCatalogViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
-
-    public MCatalogViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Список");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
-    }
+//    private MutableLiveData<String> mText;
+//
+//    public MCatalogViewModel() {
+//        mText = new MutableLiveData<>();
+//        mText.setValue("Список");
+//    }
+//
+//    public LiveData<String> getText() {
+//        return mText;
+//    }
 }

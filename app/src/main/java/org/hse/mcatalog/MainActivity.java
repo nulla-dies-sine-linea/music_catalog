@@ -1,8 +1,10 @@
 package org.hse.mcatalog;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private PreferenceManager preferenceManager;
+
+    private TextView name_nav_header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +53,26 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        Log.d("tag", "3");
+
+        name_nav_header = navigationView.getHeaderView(0).findViewById(R.id.username_nav_title);
+        name_nav_header.setText(preferenceManager.getValue("name", ""));
+//        name_nav_header.post(new Runnable() {
+//            @Override
+//            public void run() {
+////                name_nav_header.setText(preferenceManager.getValue("name", ""));
+//                name_nav_header.setText("1");
+//            }
+//        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onSupportNavigateUp() {

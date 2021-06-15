@@ -1,7 +1,11 @@
 package org.hse.mcatalog.ui.music_catalog;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+//import android.support.v4.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -22,7 +27,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.hse.mcatalog.MainActivity;
 import org.hse.mcatalog.MusicItem;
@@ -38,16 +45,30 @@ public class MCatalogFragment extends Fragment {
 
     public RecyclerView recyclerView;
     public ItemAdapter adapter;
-    private MCatalogViewModel MCatalogViewModel;
 
-//    public MainActivity activity = (MainActivity) getParentFragment().getActivity();
+//    private MCatalogViewModel MCatalogViewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MCatalogViewModel =
-                new ViewModelProvider(this).get(MCatalogViewModel.class);
+//        MCatalogViewModel =
+//                new ViewModelProvider(this).get(MCatalogViewModel.class);
         View root = inflater.inflate(R.layout.fragment_music_catalog, container, false);
         setHasOptionsMenu(true);
+
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+//
+//        myFavoriteToggleButton.isChecked();
+
+
 //        final TextView textView = root.findViewById(R.id.text_gallery);
 //        MCatalogViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
@@ -68,9 +89,35 @@ public class MCatalogFragment extends Fragment {
 //        }
         );
         recyclerView.setAdapter(adapter);
-
-        initData();
+        Log.d("tag", getActivity().getApplicationContext().toString());
+        createCatalog(getActivity().getApplicationContext());
         return root;
+    }
+
+    public void createCatalog(Context ctx) {
+        ArrayList<MusicItem> musicItemList = new ArrayList<>();
+        Uri allSongsUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0";
+        Cursor cursor =  ctx.getContentResolver().query(allSongsUri, null, null, null, selection);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    MusicItem item = new MusicItem();
+                    item.setId(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+                    item.setName(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME)));
+                    item.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
+                    item.setAlbum(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)));
+                    item.setLength(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)));
+//                            cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)));
+                    musicItemList.add(item);
+//                    album_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM));
+//                    int album_id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
+//                    int artist_id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST_ID));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            adapter.setDataList(musicItemList);
+        }
     }
 
     @Override
@@ -97,118 +144,57 @@ public class MCatalogFragment extends Fragment {
 
 //    @Override
 //    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        Log.d("tag", "4");
 //        super.onCreate(savedInstanceState);
-//        Log.d("tag", "5");
-////        setContentView(R.layout.activity_schedule);
-//        recyclerView = (RecyclerView)getParentFragment().getActivity().findViewById(R.id.recycleView);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.addItemDecoration(new DividerItemDecoration(activity, 0));
-//        adapter = new ItemAdapter(
-////                new BaseActivity.OnItemClick() {
-////            public void onClick(ScheduleItem data) {
-////            }
-////        }
-//        );
-//        recyclerView.setAdapter(adapter);
-//
-//        initData();
+//        createCatalog(this);
 //    }
 //
-    private void initData() {
-        Log.d("tag", "initdata");
-        List<MusicItem> list = new ArrayList<>();
-
-        MusicItem item = new MusicItem();
-        item.setName("Track 1");
-        item.setAuthor("Author 1");
-        list.add(item);
-
-        item = new MusicItem();
-        item.setName("Track 2");
-        item.setAuthor("Author 2");
-        list.add(item);
-
-        item = new MusicItem();
-        item.setName("Track 3");
-        item.setAuthor("Author 3");
-        list.add(item);
-
-        item = new MusicItem();
-        item.setName("Track 4");
-        item.setAuthor("Author 4");
-        list.add(item);
-
-        item = new MusicItem();
-        item.setName("Track 5");
-        item.setAuthor("Author 5");
-        list.add(item);
-
-        item = new MusicItem();
-        item.setName("Track 6");
-        item.setAuthor("Author 6");
-        list.add(item);
-
-        item = new MusicItem();
-        item.setName("Track 7");
-        item.setAuthor("Author 7");
-        list.add(item);
-
-        item = new MusicItem();
-        item.setName("Track 8");
-        item.setAuthor("Author 8");
-        list.add(item);
-
-        adapter.setDataList(list);
-    }
-//        mainViewModel.getTimeTableTeacherByDate(date).observe(this, new Observer<List<TimeTableWithTeacherEntity>>() {
-//            @Override
-//            public void onChanged(@org.jetbrains.annotations.Nullable List<TimeTableWithTeacherEntity> entitylist) {
+//    private void initData() {
+//        Log.d("tag", "initdata");
+//        List<MusicItem> list = new ArrayList<>();
 //
-//                List<ScheduleItem> list = new ArrayList<>();
+//        MusicItem item = new MusicItem();
+//        item.setName("Track 1");
+//        item.setAuthor("Author 1");
+//        list.add(item);
 //
-//                SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.forLanguageTag("ru"));
-//                SimpleDateFormat sdf2 = new SimpleDateFormat("EEEE, dd MMMM", myDateFormatSymbols);
-//                SimpleDateFormat sdf3 = new SimpleDateFormat("w", Locale.forLanguageTag("ru"));
-//                SimpleDateFormat sdf4 = new SimpleDateFormat("u", Locale.getDefault());
+//        item = new MusicItem();
+//        item.setName("Track 2");
+//        item.setAuthor("Author 2");
+//        list.add(item);
 //
+//        item = new MusicItem();
+//        item.setName("Track 3");
+//        item.setAuthor("Author 3");
+//        list.add(item);
 //
-//                for (TimeTableWithTeacherEntity entity: entitylist){
+//        item = new MusicItem();
+//        item.setName("Track 4");
+//        item.setAuthor("Author 4");
+//        list.add(item);
 //
-//                    if (type == BaseActivity.ScheduleType.DAY && sdf2.format(entity.timeTableEntity.timeStart).compareTo(sdf2.format(date)) == 0){
-//                        ScheduleItem item = new ScheduleItem();
-//                        Log.d("tag", "1");
-//                        item.setStart(sdf1.format(entity.timeTableEntity.timeStart));
-//                        item.setEnd(sdf1.format(entity.timeTableEntity.timeEnd));
-//                        item.setType(entity.timeTableEntity.type == 0? "Лекция": "Практическое занятие");
-//                        item.setName(entity.timeTableEntity.subjName);
-//                        item.setPlace(String.format("%s, %s", entity.timeTableEntity.corp, entity.timeTableEntity.cabinet));
-//                        item.setTeacher(entity.teacherEntity.fio);
-//                        list.add(item);
-//                    }
+//        item = new MusicItem();
+//        item.setName("Track 5");
+//        item.setAuthor("Author 5");
+//        list.add(item);
 //
-//                    if (type == BaseActivity.ScheduleType.WEEK &&
-//                            Integer.parseInt(sdf3.format(entity.timeTableEntity.timeStart)) == Integer.parseInt(sdf3.format(date)) &&
-//                            Integer.parseInt(sdf4.format(entity.timeTableEntity.timeStart)) >= Integer.parseInt(sdf4.format(date))){
+//        item = new MusicItem();
+//        item.setName("Track 6");
+//        item.setAuthor("Author 6");
+//        list.add(item);
 //
-//                        ScheduleItemHeader header = new ScheduleItemHeader();
-//                        header.setTitle(sdf2.format(entity.timeTableEntity.timeStart));
-//                        list.add(header);
+//        item = new MusicItem();
+//        item.setName("Track 7");
+//        item.setAuthor("Author 7");
+//        list.add(item);
 //
-//                        ScheduleItem item = new ScheduleItem();
-//                        item.setStart(sdf1.format(entity.timeTableEntity.timeStart));
-//                        item.setEnd(sdf1.format(entity.timeTableEntity.timeEnd));
-//                        item.setType(entity.timeTableEntity.type == 0? "Лекция": "Практическое занятие");
-//                        item.setName(entity.timeTableEntity.subjName);
-//                        item.setPlace(String.format("%s, %s", entity.timeTableEntity.corp, entity.timeTableEntity.cabinet));
-//                        item.setTeacher(entity.teacherEntity.fio);
-//                        list.add(item);
-//                    }
-//                }
-//                adapter.setDataList(list);
-//            }
-//        });
+//        item = new MusicItem();
+//        item.setName("Track 8");
+//        item.setAuthor("Author 8");
+//        list.add(item);
+//
+//        adapter.setDataList(list);
+//    }
+
 
     public final static class ItemAdapter extends
             RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -302,7 +288,7 @@ public class MCatalogFragment extends Fragment {
 //            Glide.with(activity).load(data.getCoverPic()).into(coverPic);
 //            coverPic.setImageResource(data.getCoverPic());
             name.setText(data.getName());
-            author.setText(data.getAuthor());
+            author.setText(data.getArtist());
         }
     }
 }

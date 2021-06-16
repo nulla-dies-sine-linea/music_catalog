@@ -30,17 +30,53 @@
         android:hint="@string/write_name_string" />
 
     <TextView
+        android:id="@+id/linkText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="20sp"
+        android:text="@string/google_cloud_storage_link_string" />
+
+    <EditText
+        android:id="@+id/cloudStorageLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="20sp"
+        android:hint="@string/paste_or_type_in_the_link_string" />
+
+    <TextView
         android:id="@+id/favText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:textSize="20sp"
         android:text="@string/string_fav" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/recycleViewFav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/playlistsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="20sp"
+        android:text="Playlists:" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewPlaylist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp">

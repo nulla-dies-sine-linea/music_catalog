@@ -15,4 +15,10 @@
     <string name="write_name_string">type in username</string>
     <string name="string_user">Username:</string>
     <string name="string_fav">Favorites:</string>
+    <string name="google_cloud_storage_link_string">Google Cloud Storage Link</string>
+    <string name="paste_or_type_in_the_link_string">paste or type in the link</string>
+    <string name="name_playlist_string">Name:</string>
+    <string name="type_in_the_name_of_the_playlist_string">type in the name of the playlist</string>
+    <string name="select_tracks_string">Select tracks</string>
+    <string name="done_button_text">Done</string>
 </resources>

@@ -2,6 +2,7 @@ package org.hse.mcatalog.ui.music_catalog;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.hse.mcatalog.CreatePlaylistActivity;
 import org.hse.mcatalog.MainActivity;
 import org.hse.mcatalog.MusicItem;
 import org.hse.mcatalog.R;
@@ -46,9 +48,6 @@ public class MCatalogFragment extends Fragment {
     public RecyclerView recyclerView;
     public ItemAdapter adapter;
 
-//    private MCatalogViewModel MCatalogViewModel;
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 //        MCatalogViewModel =
@@ -61,21 +60,21 @@ public class MCatalogFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getActivity(), CreatePlaylistActivity.class);
+                Log.d("tag", getActivity().toString());
+//                intent.putExtra(ScheduleActivity.ARG_ID, group.getName());
+//                intent.putExtra(ScheduleActivity.ARG_MODE, mode);
+//                intent.putExtra(ScheduleActivity.ARG_TYPE, type);
+//                intent.putExtra(ScheduleActivity.ARG_TIME, time);
+                startActivity(intent);
+                Log.d("tag", "2");
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 //
 //        myFavoriteToggleButton.isChecked();
 
-
-//        final TextView textView = root.findViewById(R.id.text_gallery);
-//        MCatalogViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
 
         recyclerView = root.findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext(), LinearLayoutManager.VERTICAL, false));
@@ -89,7 +88,7 @@ public class MCatalogFragment extends Fragment {
 //        }
         );
         recyclerView.setAdapter(adapter);
-        Log.d("tag", getActivity().getApplicationContext().toString());
+
         createCatalog(getActivity().getApplicationContext());
         return root;
     }
@@ -147,54 +146,6 @@ public class MCatalogFragment extends Fragment {
 //        super.onCreate(savedInstanceState);
 //        createCatalog(this);
 //    }
-//
-//    private void initData() {
-//        Log.d("tag", "initdata");
-//        List<MusicItem> list = new ArrayList<>();
-//
-//        MusicItem item = new MusicItem();
-//        item.setName("Track 1");
-//        item.setAuthor("Author 1");
-//        list.add(item);
-//
-//        item = new MusicItem();
-//        item.setName("Track 2");
-//        item.setAuthor("Author 2");
-//        list.add(item);
-//
-//        item = new MusicItem();
-//        item.setName("Track 3");
-//        item.setAuthor("Author 3");
-//        list.add(item);
-//
-//        item = new MusicItem();
-//        item.setName("Track 4");
-//        item.setAuthor("Author 4");
-//        list.add(item);
-//
-//        item = new MusicItem();
-//        item.setName("Track 5");
-//        item.setAuthor("Author 5");
-//        list.add(item);
-//
-//        item = new MusicItem();
-//        item.setName("Track 6");
-//        item.setAuthor("Author 6");
-//        list.add(item);
-//
-//        item = new MusicItem();
-//        item.setName("Track 7");
-//        item.setAuthor("Author 7");
-//        list.add(item);
-//
-//        item = new MusicItem();
-//        item.setName("Track 8");
-//        item.setAuthor("Author 8");
-//        list.add(item);
-//
-//        adapter.setDataList(list);
-//    }
-
 
     public final static class ItemAdapter extends
             RecyclerView.Adapter<RecyclerView.ViewHolder> {

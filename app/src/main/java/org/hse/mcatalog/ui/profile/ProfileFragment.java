@@ -208,57 +208,6 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-//    public final static class ItemAdapter2 extends
-//            RecyclerView.Adapter<RecyclerView.ViewHolder> {
-//
-//        private List<MusicItem> dataList = new ArrayList<>();
-//
-//        @NonNull
-//        @Override
-//        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//            Context context = parent.getContext();
-//            LayoutInflater inflater = LayoutInflater.from(context);
-//
-//            View contactView = inflater.inflate(R.layout.playlist, parent, false);
-//            return new ViewHolder(contactView);
-//        }
-//
-//        public void setDataList(List<MusicItem> list) {
-//            this.dataList = new ArrayList<>();
-//            if (dataList != null) {
-//                this.dataList.addAll(list);
-//            }
-//            notifyDataSetChanged();
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-//            MusicItem data = dataList.get(position);
-//            ((ViewHolder2) viewHolder).bind((MusicItem) data);
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return dataList.size();
-//        }
-//    }
-
-//    public static class ViewHolder2 extends  RecyclerView.ViewHolder {
-//        private TextView name;
-//        private TextView artist;
-//
-//        public ViewHolder2 (View itemView){
-//            super(itemView);
-//            name = itemView.findViewById(R.id.music_item_name);
-//            artist = itemView.findViewById(R.id.music_item_author);
-//        }
-//
-//        public void bind(final MusicItem data){
-//            name.setText(data.getName());
-//            artist.setText(data.getArtist());
-//        }
-//    }
-
 //    @Override
 //    public void onDestroy(){
 //        super.onDestroy();
